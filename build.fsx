@@ -385,7 +385,7 @@ Target.create "All" ignore
   ==> "SetCIVersion"
   ==> "Build"
   ==> "CopyBinaries"
-  ==> "RunTests"
+  //==> "RunTests"
   ==> "CINuGet"
   =?> ("GenerateReferenceDocs", isLocalBuild)
   =?> ("GenerateDocs", isLocalBuild)
