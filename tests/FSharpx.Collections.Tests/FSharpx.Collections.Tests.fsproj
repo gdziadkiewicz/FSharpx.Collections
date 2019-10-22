@@ -32,7 +32,6 @@
     <Compile Include="PersistentVectorTest.fs" />
     <Compile Include="TransientHashMapTest.fs" />
     <Compile Include="PersistentHashMapTest.fs" />
-    <Compile Include="RunTests.fs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\src\FSharpx.Collections\FSharpx.Collections.fsproj">

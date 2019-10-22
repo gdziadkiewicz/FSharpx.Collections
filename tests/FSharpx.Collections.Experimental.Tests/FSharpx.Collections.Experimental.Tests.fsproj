@@ -46,7 +46,6 @@
     <Compile Include="SkewBinomialHeapTest.fs" />
     <Compile Include="TimeSeriesTest.fs" />
     <Compile Include="ChampHashMapTest.fs" />
-    <Compile Include="RunTests.fs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\src\FSharpx.Collections.Experimental\FSharpx.Collections.Experimental.fsproj">

@@ -5,8 +5,10 @@ source http://nuget.org/api/v2
 nuget FSharp.Core >= 4.3.4
 nuget Expecto
 nuget Expecto.FsCheck
-nuget FsCheck 
+nuget FsCheck
 nuget Expecto.VisualStudio.TestAdapter version_in_path: true
+nuget YoloDev.Expecto.TestSdk
+nuget Microsoft.NET.Test.Sdk
 
 group Formatting
 source https://nuget.org/api/v2

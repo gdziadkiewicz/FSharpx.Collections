@@ -160,8 +160,12 @@ Target.create "Build" (fun _ ->
 // Run the unit tests using test runner
 
 Target.create "RunTests" (fun _ ->
-    !! testAssemblies
-    |> Expecto.run (fun x -> {x with Parallel = true; ParallelWorkers = System.Environment.ProcessorCount})
+    solutionFile
+    |> DotNet.test  (fun p -> 
+        { p with
+            Configuration = buildConfiguration
+            //RunSettingsArguments = Some ""
+        })
 )
 
 // --------------------------------------------------------------------------------------
