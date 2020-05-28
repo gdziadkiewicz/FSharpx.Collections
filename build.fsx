@@ -55,9 +55,6 @@ let solutionFile  = "FSharpx.Collections.sln"
 // Target configuration
 let configuration = "Release"
 
-// Pattern specifying assemblies to be tested using NUnit
-let testAssemblies = "tests/**/bin/Release/netcoreapp21/*Tests.dll"
-
 // Git configuration (used for publishing documentation in gh-pages branch)
 // The profile where the project is posted
 let gitOwner = "fsprojects" 
@@ -124,14 +121,6 @@ Target.create "SetCIVersion" (fun _ ->
     Trace.setBuildNumber version
 )
 
-// Copies binaries from default VS location to exepcted bin folder
-// But keeps a subdirectory structure for each project in the 
-// src folder to support multiple project outputs
-Target.create "CopyBinaries" (fun _ ->
-    !! "src/**/*.??proj"
-    |>  Seq.map (fun f -> ((System.IO.Path.GetDirectoryName f) @@ "bin/Release", "bin" @@ (System.IO.Path.GetFileNameWithoutExtension f)))
-    |>  Seq.iter (fun (fromDir, toDir) -> Shell.copyDir toDir fromDir (fun _ -> true))
-)
 
 // --------------------------------------------------------------------------------------
 // Clean build results
@@ -160,8 +149,13 @@ Target.create "Build" (fun _ ->
 // Run the unit tests using test runner
 
 Target.create "RunTests" (fun _ ->
-    !! testAssemblies
-    |> Expecto.run (fun x -> {x with Parallel = true; ParallelWorkers = System.Environment.ProcessorCount})
+    solutionFile
+    |> DotNet.test (fun x ->
+        {x with
+            Configuration = buildConfiguration
+            Logger = if BuildServer.buildServer = AppVeyor then Some "AppVeyor" else None
+            RunSettingsArguments = Some <| sprintf "Expecto.parallel=true Expecto.parallel-workers=%i" System.Environment.ProcessorCount
+        })
 )
 
 // --------------------------------------------------------------------------------------
@@ -171,6 +165,7 @@ let nuGet out suffix =
 
     Paket.pack(fun p -> 
         { p with
+            ToolType = ToolType.CreateLocalTool ()
             OutputPath = out
             Version = release.NugetVersion + (suffix |> Option.defaultValue "")
             ReleaseNotes = releaseNotes})
@@ -187,6 +182,7 @@ Target.create "CINuGet" (fun _ ->
 Target.create "PublishNuget" (fun _ ->
     Paket.push(fun p -> 
         { p with
+            ToolType = ToolType.CreateLocalTool ()
             WorkingDir = "bin" })
 )
 
@@ -380,7 +376,6 @@ Target.create "All" ignore
   ==> "AssemblyInfo"
   ==> "SetCIVersion"
   ==> "Build"
-  ==> "CopyBinaries"
   ==> "RunTests"
   ==> "CINuGet"
   =?> ("GenerateReferenceDocs", isLocalBuild)

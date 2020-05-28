@@ -1,4 +1,7 @@
-FsCheck
-Expecto
-Expecto.FsCheck
-Expecto.VisualStudio.TestAdapter
+group Test
+  FsCheck
+  Expecto
+  Expecto.FsCheck
+  Microsoft.NET.Test.Sdk
+  YoloDev.Expecto.TestSdk
+  Appveyor.TestLogger

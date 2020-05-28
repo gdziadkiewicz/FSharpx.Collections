@@ -15,7 +15,7 @@ requireLicenseAcceptance
 language
     F#
 copyright
-    Copyright 2018
+    Copyright 2020
 tags
     F# fsharp fsharpx collections datastructures
 summary
@@ -28,9 +28,9 @@ dependencies
   framework: netstandard20
     FSharp.Core >= 4.3.4
 files
-    ../../bin/FSharpx.Collections/net45/FSharpx.Collections.dll ==> lib/net45
-    ../../bin/FSharpx.Collections/net45/FSharpx.Collections.pdb ==> lib/net45
-    ../../bin/FSharpx.Collections/net45/FSharpx.Collections.xml ==> lib/net45
-    ../../bin/FSharpx.Collections/netstandard2.0/FSharpx.Collections.dll ==> lib/netstandard2.0
-    ../../bin/FSharpx.Collections/netstandard2.0/FSharpx.Collections.pdb ==> lib/netstandard2.0
-    ../../bin/FSharpx.Collections/netstandard2.0/FSharpx.Collections.xml ==> lib/netstandard2.0
+    .\bin/Release/FSharpx.Collections/net45/FSharpx.Collections.dll ==> lib/net45
+    .\bin/Release/FSharpx.Collections/net45/FSharpx.Collections.pdb ==> lib/net45
+    .\bin/Release/FSharpx.Collections/net45/FSharpx.Collections.xml ==> lib/net45
+    .\bin/Release/FSharpx.Collections/netstandard2.0/FSharpx.Collections.dll ==> lib/netstandard2.0
+    .\bin/Release/FSharpx.Collections/netstandard2.0/FSharpx.Collections.pdb ==> lib/netstandard2.0
+    .\bin/Release/FSharpx.Collections/netstandard2.0/FSharpx.Collections.xml ==> lib/netstandard2.0
